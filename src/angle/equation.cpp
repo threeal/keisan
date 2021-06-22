@@ -18,11 +18,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#ifndef KEISAN__ANGLE_HPP_
-#define KEISAN__ANGLE_HPP_
+#include <keisan/angle/angle.hpp>
+#include <keisan/angle/equation.hpp>
 
-#include "./angle/angle.hpp"
-#include "./angle/equation.hpp"
-#include "./angle/trigonometry.hpp"
+namespace keisan
+{
 
-#endif  // KEISAN__ANGLE_HPP_
+double wrap_rad(double value)
+{
+  return make_radian(value).normalized_radian();
+}
+
+double wrap_deg(double value)
+{
+  return make_degree(value).normalized_degree();
+}
+
+double rad_to_deg(double value)
+{
+  return make_radian(value).normalized_degree();
+}
+
+double deg_to_rad(double value)
+{
+  return make_degree(value).normalized_radian();
+}
+
+double delta_rad(double value1, double value2)
+{
+  return difference_between(make_radian(value1), make_radian(value2)).radian();
+}
+
+double delta_deg(double value1, double value2)
+{
+  return difference_between(make_degree(value1), make_degree(value2)).degree();
+}
+
+}  // namespace keisan

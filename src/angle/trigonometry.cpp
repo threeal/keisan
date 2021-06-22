@@ -18,40 +18,45 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/angle.hpp>
-#include <keisan/number.hpp>
+#include <keisan/angle/angle.hpp>
+#include <keisan/angle/trigonometry.hpp>
 
 namespace keisan
 {
 
-double wrap_rad(double value)
+double sin(const Angle & angle)
 {
-  return wrap_number(value, -pi, pi);
+  return std::sin(angle.radian());
 }
 
-double wrap_deg(double value)
+double cos(const Angle & angle)
 {
-  return wrap_number(value, -180.0, 180.0);
+  return std::cos(angle.radian());
 }
 
-double rad_to_deg(double value)
+double tan(const Angle & angle)
 {
-  return wrap_deg(scale_number(value, pi, 180.0));
+  return std::tan(angle.radian());
 }
 
-double deg_to_rad(double value)
+Angle arcsin(const double & value)
 {
-  return wrap_rad(scale_number(value, 180.0, pi));
+  return make_radian(std::asin(value));
 }
 
-double delta_rad(double value1, double value2)
+Angle arccos(const double & value)
 {
-  return wrap_rad(wrap_rad(value2) - wrap_rad(value1));
+  return make_radian(std::acos(value));
 }
 
-double delta_deg(double value1, double value2)
+Angle arctan(const double & value)
 {
-  return wrap_deg(wrap_deg(value2) - wrap_deg(value1));
+  return make_radian(std::atan(value));
+}
+
+Angle signed_arctan(const double & y, const double & x)
+{
+  return make_radian(std::atan2(y, x));
 }
 
 }  // namespace keisan

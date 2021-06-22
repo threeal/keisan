@@ -18,42 +18,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#include <keisan/number.hpp>
+#ifndef KEISAN__ANGLE__ANGLE_HPP_
+#define KEISAN__ANGLE__ANGLE_HPP_
 
-#include <algorithm>
 #include <cmath>
 
 namespace keisan
 {
 
-double wrap_number(double value, double min, double max)
-{
-  double min_value = value - min;
-  double min_max = max - min;
+constexpr double pi = std::atan(1.0) * 4;
 
-  return min + std::fmod(min_max + std::fmod(min_value, min_max), min_max);
-}
+class Angle;
 
-double scale_number(double value, double source, double target)
-{
-  return value * target / source;
-}
+Angle make_degree(const double & value);
+Angle make_radian(const double & value);
 
-double map_number(
-  double value, double source_min, double source_max, double target_min, double target_max)
-{
-  return target_min + scale_number(
-    value - source_min, source_max - source_min, target_max - target_min);
-}
+Angle difference_between(const Angle & a, const Angle & b);
 
-double clamp_number(double value, double min_value, double max_value)
+class Angle
 {
-  return std::max(std::min(value, max_value), min_value);
-}
+public:
+  explicit Angle(const double & data, const bool & is_degree = false);
+  Angle(const Angle & angle);
 
-double sign_number(double value)
-{
-  return (value >= 0) ? 1.0 : -1.0;
-}
+  Angle & operator=(const Angle & angle);
+
+  Angle & operator+=(const Angle & angle);
+  Angle & operator-=(const Angle & angle);
+
+  Angle & operator*=(const double & value);
+  Angle & operator/=(const double & value);
+
+  Angle operator+(const Angle & angle) const;
+  Angle operator-(const Angle & angle) const;
+
+  Angle operator*(const double & value) const;
+  Angle operator/(const double & value) const;
+
+  double degree() const;
+  double radian() const;
+
+  double normalized_degree() const;
+  double normalized_radian() const;
+
+  Angle difference_to(const Angle & angle) const;
+
+private:
+  double data;
+  bool is_degree;
+};
 
 }  // namespace keisan
+
+#endif  // KEISAN__ANGLE__ANGLE_HPP_
