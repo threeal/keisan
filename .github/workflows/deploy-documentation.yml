@@ -2,7 +2,7 @@ name: Deploy Documentation
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   deploy-documentation:
     runs-on: ubuntu-latest
