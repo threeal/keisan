@@ -45,6 +45,11 @@ Angle::Angle(const double & data, const bool & is_degree)
 {
 }
 
+Angle::Angle()
+: Angle(0.0)
+{
+}
+
 Angle::Angle(const Angle & angle)
 {
   *this = angle;
@@ -56,6 +61,31 @@ Angle & Angle::operator=(const Angle & angle)
   is_degree = angle.is_degree;
 
   return *this;
+}
+
+bool Angle::operator==(const Angle & angle) const
+{
+  return data == (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator>(const Angle & angle) const
+{
+  return data > (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator>=(const Angle & angle) const
+{
+  return data >= (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator<(const Angle & angle) const
+{
+  return data < (is_degree ? angle.degree() : angle.radian());
+}
+
+bool Angle::operator<=(const Angle & angle) const
+{
+  return data <= (is_degree ? angle.degree() : angle.radian());
 }
 
 Angle & Angle::operator+=(const Angle & angle)
@@ -102,6 +132,11 @@ Angle Angle::operator/(const double & value) const
   return Angle(data / value, is_degree);
 }
 
+Angle Angle::operator-() const
+{
+  return Angle(-data, is_degree);
+}
+
 double Angle::degree() const
 {
   return is_degree ? data : scale_number(data, pi, 180.0);
@@ -112,22 +147,21 @@ double Angle::radian() const
   return is_degree ? scale_number(data, 180.0, pi) : data;
 }
 
-double Angle::normalized_degree() const
+Angle Angle::normalize() const
 {
-  return wrap_number(degree(), -180.0, 180.0);
-}
-
-double Angle::normalized_radian() const
-{
-  return wrap_number(radian(), -pi, pi);
+  if (is_degree) {
+    return make_degree(wrap_number(data, -180.0, 180.0));
+  } else {
+    return make_radian(wrap_number(data, -pi, pi));
+  }
 }
 
 Angle Angle::difference_to(const Angle & angle) const
 {
   if (is_degree) {
-    return make_degree((angle - *this).normalized_degree());
+    return make_degree((angle - *this).normalize().degree());
   } else {
-    return make_radian((angle - *this).normalized_radian());
+    return make_radian((angle - *this).normalize().radian());
   }
 }
 

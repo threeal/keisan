@@ -39,9 +39,17 @@ class Angle
 {
 public:
   explicit Angle(const double & data, const bool & is_degree = false);
+  Angle();
+
   Angle(const Angle & angle);
 
   Angle & operator=(const Angle & angle);
+
+  bool operator==(const Angle & angle) const;
+  bool operator>(const Angle & angle) const;
+  bool operator>=(const Angle & angle) const;
+  bool operator<(const Angle & angle) const;
+  bool operator<=(const Angle & angle) const;
 
   Angle & operator+=(const Angle & angle);
   Angle & operator-=(const Angle & angle);
@@ -55,11 +63,12 @@ public:
   Angle operator*(const double & value) const;
   Angle operator/(const double & value) const;
 
+  Angle operator-() const;
+
   double degree() const;
   double radian() const;
 
-  double normalized_degree() const;
-  double normalized_radian() const;
+  Angle normalize() const;
 
   Angle difference_to(const Angle & angle) const;
 
