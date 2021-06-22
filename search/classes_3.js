@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['squarematrix_90',['SquareMatrix',['../classkeisan_1_1SquareMatrix.html',1,'keisan']]]
+  ['squarematrix_93',['SquareMatrix',['../classkeisan_1_1SquareMatrix.html',1,'keisan']]]
 ];
