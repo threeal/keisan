@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tan_171',['tan',['../namespacekeisan.html#a2662ab3159c181653993256fe123a963',1,'keisan']]],
-  ['transform2_172',['Transform2',['../classkeisan_1_1Transform2.html#ac0d128199ac05acd5d441372bf87dcdc',1,'keisan::Transform2']]]
+  ['rad_5fto_5fdeg_182',['rad_to_deg',['../namespacekeisan.html#ae76de275693f4f0233b1294d3a3a5374',1,'keisan']]],
+  ['radian_183',['radian',['../classkeisan_1_1Angle.html#af9f7bd883bdd80565378619997548aa5',1,'keisan::Angle']]]
 ];
